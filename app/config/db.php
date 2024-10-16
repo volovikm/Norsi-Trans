@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=norci-trans',
+    'dsn' => 'mysql:host=localhost;dbname=norsi-trans',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
