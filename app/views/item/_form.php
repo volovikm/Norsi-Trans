@@ -9,6 +9,12 @@ use app\models\Item_type;
 /** @var yii\widgets\ActiveForm $form */
 
 $item_type=new Item_type;
+
+//Значение поля выбора типа комплектующей
+$type_dropdown_value=""; //Значение типа по-умолчанию
+if(isset($model->itemType->attributes["id"]))
+{$type_dropdown_value=$model->itemType->attributes["id"];}
+
 ?>
 
 <div class="item-form">
@@ -20,7 +26,7 @@ $item_type=new Item_type;
     <?= $form->field($model, 'item_type_id') //Поле выбора типа комплектующей
     ->dropDownList(
         $item_type->getItemTypesArray(),
-        ["value"=>$model->itemType->attributes["id"]]);
+        ["value"=>$type_dropdown_value]);
     ?>
 
     <?= $form->field($model, 'in_stock') //Поле выбора "В наличие"

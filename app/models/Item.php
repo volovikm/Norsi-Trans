@@ -13,6 +13,14 @@ class Item extends ActiveRecord
       return 'item';
    }
 
+   //Необходимые поля модели
+   public function rules()
+   {
+      return [
+         [['name', 'item_type_id','in_stock'], 'required'],
+      ];
+   }
+
    //Связь с таблицей item_type
    public function getItemType(){
       return $this->hasOne(Item_type::className(), ['id' => 'item_type_id']);
