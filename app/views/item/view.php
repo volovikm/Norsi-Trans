@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var app\models\Item $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Комплектующие', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Удалить комплектующие?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,13 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        
         'attributes' => [
             'id',
-            'name',
-            'item_type_name',
-            'added_at',
-            'updated_at',
-            'in_stock',
+            ['label' => 'Название', 'attribute' => 'name', 'value' => $model->name],
+            ['label' => 'Тип', 'attribute' => 'item_type_name', 'value' => $model->itemType->name],
+            ['label' => 'Добавлено', 'attribute' => 'added_at', 'value' => $model->added_at],
+            ['label' => 'Обновлено', 'attribute' => 'updated_at', 'value' => $model->updated_at],
+            ['label' => 'В наличие', 'attribute' => 'in_stock', 'value' => $model->convertInStock(true)],
         ],
     ]) ?>
 
