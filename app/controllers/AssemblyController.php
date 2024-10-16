@@ -69,12 +69,15 @@ class AssemblyController extends Controller
     {
         $model = new Assembly();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        if(isset($this->request->post()["save"])) //Параметр, показывающий что данные отправлены нажатием кнопки, а не валидацией
+        {
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save() && isset($this->request->post()["save"])) {
+                    return $this->redirect(['view', 'id' => $model->id]); 
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -93,7 +96,19 @@ class AssemblyController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && isset($this->request->post()["save"])) {
+            
+            //Внесение полей из запроса в модель
+            foreach($this->request->post()["Item"] as $key=>$property)
+            {
+                $model->$key=$property;
+            }
+
+            //Внесение времени обновления
+            $model->updated_at=date("Y-m-d H:i");
+
+            $model->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

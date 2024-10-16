@@ -11,6 +11,19 @@ class Assembly extends ActiveRecord
        return 'assembly';
     }
 
+    //Необходимые поля модели
+   public function rules()
+   {
+      return [
+         [['name'], 'required'],
+      ];
+   }
+
+    //Связь с таблицей assembly_item
+    public function getAssemblyItem() {
+        return $this->hasMany(Assembly_item::className(), ['assembly_id' => 'id']);
+    }
+
     //Метки атрибутов
     public function attributeLabels()
     {

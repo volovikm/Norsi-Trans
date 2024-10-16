@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Assembly $model */
 
-$this->title = 'Update Assembly: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Assemblies', 'url' => ['index']];
+$this->title = 'Редактировать сборку: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Сборки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="assembly-update">
 

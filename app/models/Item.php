@@ -60,4 +60,18 @@ class Item extends ActiveRecord
             'in_stock' => 'В наличие'
         ];
       }
+
+   //Метод нахождения всех компонентов
+    public function getItemsArray()
+    {
+        $items_arr=$this::find()->asArray()->all();
+
+        $result_arr=[];
+        foreach($items_arr as $item)
+        {
+            $result_arr+=[$item["id"]=>$item["name"]];
+        }
+
+        return($result_arr);
+    }
 }

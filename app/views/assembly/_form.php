@@ -2,28 +2,29 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Item;
 
 /** @var yii\web\View $this */
 /** @var app\models\Assembly $model */
 /** @var yii\widgets\ActiveForm $form */
+
+$item=new Item;
+
+
+$item_arr=$item->getItemsArray(); //Массив всех комплектующих
+
 ?>
 
 <div class="assembly-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'id')->textInput() ?>
-
-    <?= $form->field($model, 'added_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?php $form = ActiveForm::begin([
+    'enableAjaxValidation' => true
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success','name'=>'save']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

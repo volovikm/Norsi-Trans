@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Assembly $model */
 
-$this->title = 'Create Assembly';
-$this->params['breadcrumbs'][] = ['label' => 'Assemblies', 'url' => ['index']];
+$this->title = 'Сборки';
+$this->params['breadcrumbs'][] = ['label' => 'Сборки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assembly-create">

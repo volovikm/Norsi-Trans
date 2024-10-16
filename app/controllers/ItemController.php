@@ -69,12 +69,15 @@ class ItemController extends Controller
     {
         $model = new Item();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        if(isset($this->request->post()["save"])) //Параметр, показывающий что данные отправлены нажатием кнопки, а не валидацией
+        {
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
