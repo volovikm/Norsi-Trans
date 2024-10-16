@@ -93,7 +93,19 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            
+            //Внесение полей из запроса в модель
+            foreach($this->request->post()["Item"] as $key=>$property)
+            {
+                $model->$key=$property;
+            }
+
+            //Внесение времени обновления
+            $model->updated_at=date("Y-m-d H:i");
+
+            $model->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

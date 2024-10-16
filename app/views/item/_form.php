@@ -17,7 +17,7 @@ $item_type=new Item_type;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'item_type_name') //Поле выбора типа комплектующей
+    <?= $form->field($model, 'item_type_id') //Поле выбора типа комплектующей
     ->dropDownList(
         $item_type->getItemTypesArray(),
         ["value"=>$model->itemType->attributes["id"]]);

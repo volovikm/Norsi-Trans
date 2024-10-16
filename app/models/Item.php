@@ -46,6 +46,7 @@ class Item extends ActiveRecord
         return [
             'name' => 'Название',
             'item_type_name' => 'Тип',
+            'item_type_id' => 'Тип',
             'added_at' =>'Дата добавления',
             'updated_at' =>'Дата обновления',
             'in_stock' => 'В наличие'
