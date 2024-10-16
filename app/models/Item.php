@@ -30,4 +30,16 @@ class Item extends ActiveRecord
          }
       }
    }
+
+   //Метки атрибутов
+   public function attributeLabels()
+    {
+        return [
+            'name' => 'Название',
+            'item_type_name' => 'Тип',
+            'added_at' =>'Дата добавления',
+            'updated_at' =>'Дата обновления',
+            'in_stock' => 'В наличие'
+        ];
+      }
 }

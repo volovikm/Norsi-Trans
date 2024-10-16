@@ -31,11 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            ['label' => 'Название', 'attribute' => 'name', 'value' => 'name'],
-            ['label' => 'Тип', 'attribute' => 'item_type_name', 'value' =>'itemType.name'],
-            ['label' => 'Дата добавления', 'attribute' => 'added_at','value' =>'added_at'],
-            ['label' => 'Дата обновления','attribute' => 'updated_at','value' => 'updated_at'],
-            ['label' => 'В наличие','attribute' => 'in_stock','value' => function($model){return $model->convertInStock(true);}],
+            'name',
+            ['attribute' => 'item_type_name', 'value' =>'itemType.name'],
+            'added_at',
+            'updated_at',
+            ['attribute' => 'in_stock','value' => function($model){return $model->convertInStock(true);}],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Item $model, $key, $index, $column) {
