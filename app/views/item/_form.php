@@ -19,7 +19,10 @@ if(isset($model->itemType->attributes["id"]))
 
 <div class="item-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+    'enableAjaxValidation' => true,
+    'enableClientValidation' => true,
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -37,6 +40,7 @@ if(isset($model->itemType->attributes["id"]))
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::Button('Сохранить', ['id'=>'submit_button','class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

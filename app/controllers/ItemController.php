@@ -92,7 +92,7 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        
         if ($this->request->isPost && $model->load($this->request->post())) {
             
             //Внесение полей из запроса в модель
@@ -106,7 +106,7 @@ class ItemController extends Controller
 
             $model->save();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+           return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
