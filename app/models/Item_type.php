@@ -13,5 +13,19 @@ class Item_type extends ActiveRecord
 
      public function getItems(){
       return $this->hasMany(Item::className(), ['item_type_id' => 'id']);
-  }
+    }
+
+    //Метод нахождения всех типов компонентов
+    public function getItemTypesArray()
+    {
+        $item_types_arr=$this::find()->asArray()->all();
+
+        $result_arr=[];
+        foreach($item_types_arr as $type)
+        {
+            $result_arr+=[$type["id"]=>$type["name"]];
+        }
+
+        return($result_arr);
+    }
 }

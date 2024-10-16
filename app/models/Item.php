@@ -21,7 +21,7 @@ class Item extends ActiveRecord
    //Метод преобразования значения in_stock в текст и обратно для вывода и поиска
    public function convertInStock($to_text=false,$text="") {
 
-      if($to_text) return $this->in_stock ? "Есть" : "Нет";
+      if($to_text) return ($this->inStockValuesArr()[$this->in_stock]);
       else
       {
          switch(trim(mb_strtolower($text))){
@@ -29,6 +29,15 @@ class Item extends ActiveRecord
             case "нет": return 0;
          }
       }
+   }
+
+   //Массив возможных значений in_stock
+   public function inStockValuesArr()
+   {
+      return([
+         0=>"Нет",
+         1=>"Есть"
+      ]);
    }
 
    //Метки атрибутов
