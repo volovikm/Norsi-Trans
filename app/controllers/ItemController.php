@@ -92,8 +92,8 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if ($this->request->isPost && $model->load($this->request->post())) {
+
+        if ($this->request->isPost && $model->load($this->request->post()) && isset($this->request->post()["save"])) {
             
             //Внесение полей из запроса в модель
             foreach($this->request->post()["Item"] as $key=>$property)
@@ -106,7 +106,7 @@ class ItemController extends Controller
 
             $model->save();
 
-           return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [

@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /** @var app\models\AssemblySearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Assemblies';
+$this->title = 'Сборки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assembly-index">
@@ -18,18 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Assembly', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить сборку', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'added_at',
             'updated_at',

@@ -10,4 +10,15 @@ class Assembly extends ActiveRecord
     {
        return 'assembly';
     }
+
+    //Метки атрибутов
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Название',
+            'added_at' =>'Дата добавления',
+            'updated_at' =>'Дата обновления',
+            'status' => 'Статус'
+        ];
+    }
 }
