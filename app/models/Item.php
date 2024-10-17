@@ -18,6 +18,7 @@ class Item extends ActiveRecord
    {
       return [
          [['name', 'item_type_id','in_stock'], 'required'],
+         [['status'], 'safe'],
       ];
    }
 
@@ -25,6 +26,8 @@ class Item extends ActiveRecord
    public function getItemType(){
       return $this->hasOne(Item_type::className(), ['id' => 'item_type_id']);
   }
+
+
 
    //Метод преобразования значения in_stock в текст и обратно для вывода и поиска
    public function convertInStock($to_text=false,$text="") {
@@ -39,6 +42,19 @@ class Item extends ActiveRecord
       }
    }
 
+   //Метод преобразования значения status в текст и обратно для вывода и поиска
+   public function convertStatus($to_text=false,$text="") {
+
+      if($to_text) return ($this->statusValuesArr()[$this->status]);
+      else
+      {
+         switch(trim(mb_strtolower($text))){
+            case "активна": return 1;
+            case "удалена": return 2;
+         }
+      }
+   }
+
    //Массив возможных значений in_stock
    public function inStockValuesArr()
    {
@@ -47,6 +63,17 @@ class Item extends ActiveRecord
          1=>"Есть"
       ]);
    }
+
+   //Массив возможных значений status
+   public function statusValuesArr()
+   {
+      return([
+         1=>"Активна",
+         2=>"Удалена"
+      ]);
+   }
+
+
 
    //Метки атрибутов
    public function attributeLabels()
@@ -57,9 +84,10 @@ class Item extends ActiveRecord
             'item_type_id' => 'Тип',
             'added_at' =>'Дата добавления',
             'updated_at' =>'Дата обновления',
-            'in_stock' => 'В наличие'
+            'in_stock' => 'В наличие',
+            'status' => 'Статус',
         ];
-      }
+   }
 
    //Метод нахождения всех компонентов
     public function getItemsArray()

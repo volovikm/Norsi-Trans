@@ -17,8 +17,8 @@ class AssemblySearch extends Assembly
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['added_at', 'updated_at', 'name'], 'safe'],
+            [['id'], 'integer'],
+            [['added_at', 'updated_at', 'name','status'], 'safe'],
         ];
     }
 
@@ -42,26 +42,23 @@ class AssemblySearch extends Assembly
     {
         $query = Assembly::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize' => 100],
         ]);
 
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
+        //Фильтры поиска
         $query->andFilterWhere([
             'id' => $this->id,
             'added_at' => $this->added_at,
             'updated_at' => $this->updated_at,
-            'status' => $this->status,
+            'assembly.status' => $this->convertStatus(false,$this->status),
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

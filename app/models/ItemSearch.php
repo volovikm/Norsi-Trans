@@ -18,7 +18,7 @@ class ItemSearch extends Item
     {
         return [
             [['id', 'item_type_id'], 'integer'],
-            [['added_at', 'updated_at', 'name','in_stock'], 'safe'],
+            [['added_at', 'updated_at', 'name','in_stock','status'], 'safe'],
             [['item_type_name',], 'string'],
         ];
     }
@@ -47,7 +47,7 @@ class ItemSearch extends Item
             'pagination' => ['pageSize' => 100],
         ]);
 
-        //join  с таблицей item_type
+        //join с таблицей item_type
         $query->joinWith("itemType", true,"INNER JOIN");
 
         //Дополнительные атрибуты
@@ -63,15 +63,15 @@ class ItemSearch extends Item
         }
 
         //Фильтры поиска
-        /**/
         $query->andFilterWhere([
             'item.id' =>$this->id,
             'item.name' => $this->name,
             'item.added_at' => $this->added_at,
             'item.updated_at' => $this->updated_at,
             'item.in_stock' => $this->convertInStock(false,$this->in_stock), 
+            'item.status' =>$this->convertStatus(false,$this->status),
         ]);
-        
+
         $query->andFilterWhere(['LIKE', 'item.name', $this->name]);
         $query->andFilterWhere(['LIKE', 'item_type.name', $this->item_type_name]);
         

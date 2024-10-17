@@ -99,7 +99,7 @@ class AssemblyController extends Controller
         if ($this->request->isPost && $model->load($this->request->post()) && isset($this->request->post()["save"])) {
             
             //Внесение полей из запроса в модель
-            foreach($this->request->post()["Item"] as $key=>$property)
+            foreach($this->request->post()["Assembly"] as $key=>$property)
             {
                 $model->$key=$property;
             }

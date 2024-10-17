@@ -126,7 +126,13 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if($model->status==1)
+            $model->status=2;
+        else
+            $model->status=1;
+
+        $model->save();
 
         return $this->redirect(['index']);
     }

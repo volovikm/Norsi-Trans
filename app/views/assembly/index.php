@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'added_at',
             'updated_at',
             'name',
-            'status',
+            ['attribute' => 'status','value' => function($model){return $model->convertStatus(true);}],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Assembly $model, $key, $index, $column) {
