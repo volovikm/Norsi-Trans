@@ -92,7 +92,7 @@ class Item extends ActiveRecord
    //Метод нахождения всех компонентов
     public function getItemsArray()
     {
-        $items_arr=$this::find()->asArray()->all();
+        $items_arr=$this::find()->where(['status'=>'1'])->asArray()->all();
 
         $result_arr=[];
         foreach($items_arr as $item)

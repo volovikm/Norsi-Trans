@@ -28,9 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
+            'name',
             'added_at',
             'updated_at',
-            'name',
             ['attribute' => 'status','value' => function($model){return $model->convertStatus(true);}],
             [
                 'class' => ActionColumn::className(),

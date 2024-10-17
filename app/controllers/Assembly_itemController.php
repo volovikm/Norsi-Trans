@@ -47,12 +47,16 @@ class Assembly_itemController extends Controller
 
         if(isset($this->request->post()['assembly_id']))
         {
-            
             //Внесение полей из запроса в модель
             foreach($this->request->post() as $key=>$property)
             {
                 $model->$key=$property;
             }
+
+            //Внесение времени обновления в модель сборки
+            $assembly = Assembly::findOne(['id' => $this->request->post()['assembly_id']]);
+            $assembly->updated_at=date("Y-m-d H:i");
+            $assembly->save();
 
             $model->save();
 

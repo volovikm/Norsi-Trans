@@ -15,7 +15,7 @@ class Assembly extends ActiveRecord
     public function rules()
     {
       return [
-         [['name','id'], 'required'],
+         [['name'], 'required'],
       ];
     }
 

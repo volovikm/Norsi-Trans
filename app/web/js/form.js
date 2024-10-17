@@ -44,6 +44,7 @@ function responseHandler(response)
 {
     let error_message=document.getElementById("error_message");
     let close_modal_button=document.getElementById("close_modal_button");
+    let save_button=document.getElementById("save_assembly_button");
 
     if(response=="request_error")
     {
