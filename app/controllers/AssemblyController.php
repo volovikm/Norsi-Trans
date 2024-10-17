@@ -97,14 +97,11 @@ class AssemblyController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && isset($this->request->post()["save"])) {
-            
-            //var_dump($this->request->post()); exit;
 
             //Внесение полей из запроса в модель
             foreach($this->request->post()["Assembly"] as $key=>$property)
             {
-                if(isset($model->$key))
-                    $model->$key=$property;
+                $model->$key=$property;
             }
 
             //Внесение времени обновления
@@ -129,7 +126,13 @@ class AssemblyController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if($model->status==1)
+            $model->status=2;
+        else
+            $model->status=1;
+
+        $model->save();
 
         return $this->redirect(['index']);
     }

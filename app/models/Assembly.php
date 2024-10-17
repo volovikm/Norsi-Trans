@@ -13,10 +13,9 @@ class Assembly extends ActiveRecord
 
     //Необходимые поля модели
     public function rules()
-   {
+    {
       return [
-         [['id','name'], 'required'],
-         //[['status'], 'string'],
+         [['name','id'], 'required'],
       ];
     }
 

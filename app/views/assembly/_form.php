@@ -24,8 +24,15 @@ $item = new Item();
 
 //Кнопки списка компонентов сборки
 $assembly_item_buttons =   ['class' => 'yii\grid\ActionColumn',
-    'template' => '{update} {delete}',
-];
+    'template' => '{delete}',
+
+    'buttons' => [
+        'delete' => function ($url, $assembly_item,$id) {
+            return Html::a('Удалить', ['/assembly_item/delete', 'id' => $assembly_item->id],[]);
+        },
+    ]
+
+    ];
 ?>
 
 <div class="assembly-form">
@@ -84,7 +91,6 @@ $assembly_item_buttons =   ['class' => 'yii\grid\ActionColumn',
             ['attribute' => 'item_name', 'value' =>'item.name'],
             ['attribute' => 'item_type_name', 'value' =>'item.itemType.name'],
             'count',
-            ['attribute' => 'status','value' => function($assembly_item){return $assembly_item->convertStatus(true);}],
             $assembly_item_buttons,
         ],
     ]); ?>

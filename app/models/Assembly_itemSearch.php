@@ -18,8 +18,7 @@ class Assembly_itemSearch extends Assembly_item
     public function rules()
     {
         return [
-            [['id', 'assembly_id', 'item_id', 'count', 'status'], 'integer'],
-            [['added_at', 'updated_at','item_name','item_type_name'], 'safe'],
+            [['id', 'assembly_id', 'item_id', 'status'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class Assembly_itemSearch extends Assembly_item
      */
     public function search($params,$assembly_id)
     {
-        $query = Assembly_item::find()->where(['assembly_id'=>$assembly_id]);
+        $query = Assembly_item::find()->where(['assembly_id'=>$assembly_id,'assembly_item.status'=>1]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -27,7 +27,7 @@ class Assembly_itemController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+                        'delete' => ['GET'],
                     ],
                 ],
             ]
@@ -51,7 +51,7 @@ class Assembly_itemController extends Controller
             //Внесение полей из запроса в модель
             foreach($this->request->post() as $key=>$property)
             {
-                $model->$key=(integer) $property;
+                $model->$key=$property;
             }
 
             $model->save();
@@ -71,12 +71,16 @@ class Assembly_itemController extends Controller
      * @param int $id
      * @throws NotFoundHttpException if the model cannot be found
      */
-    /* public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+        $model->status=2;
+
+        $model->save();
+        return $this->redirect('index.php?r=assembly%2Fupdate&id='.$model->assembly_id);
     }
+
 
     /**
      * Finds the Assembly_item model based on its primary key value.
@@ -87,7 +91,7 @@ class Assembly_itemController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Assembly::findOne(['id' => $id])) !== null) {
+        if (($model = Assembly_item::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
