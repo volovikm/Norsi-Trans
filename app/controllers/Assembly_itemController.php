@@ -2,22 +2,17 @@
 
 namespace app\controllers;
 
-use app\controllers\AssemblyController;
 use app\models\Assembly;
 use app\models\Assembly_item;
-use app\models\Assembly_itemSearch; 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * Assembly_itemController implements the CRUD actions for Assembly_item model.
- */
 class Assembly_itemController extends Controller
 {
     /**
-     * @inheritDoc
-     */
+    * @inheritDoc
+    */
 
     public function behaviors()
     {
@@ -34,13 +29,7 @@ class Assembly_itemController extends Controller
         );
     }
 
-
-
-    /**
-     * Creates a new Assembly_item model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
+    //Добавление компонента в сборку
     public function actionCreate()
     {
         $model = new Assembly_item();
@@ -69,13 +58,7 @@ class Assembly_itemController extends Controller
         return 'request_error';
     }
 
-    /**
-     * Deletes an existing Assembly_item model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-
+    //Удаление компонента из сборки (обновляется status=2)
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -85,14 +68,6 @@ class Assembly_itemController extends Controller
         return $this->redirect('index.php?r=assembly%2Fupdate&id='.$model->assembly_id);
     }
 
-
-    /**
-     * Finds the Assembly_item model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Assembly_item::findOne(['id' => $id])) !== null) {

@@ -8,14 +8,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * ItemController implements the CRUD actions for Item model.
- */
 class ItemController extends Controller
 {
     /**
-     * @inheritDoc
-     */
+    * @inheritDoc
+    */
     public function behaviors()
     {
         return array_merge(
@@ -31,11 +28,7 @@ class ItemController extends Controller
         );
     }
 
-    /**
-     * Lists all Item models.
-     *
-     * @return string
-     */
+    //Переход на страницу с таблицей компонентов
     public function actionIndex()
     {
         $searchModel = new ItemSearch();
@@ -47,12 +40,7 @@ class ItemController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Item model.
-     * @param int $id
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    //Переход на страницу с view отдельного компонента
     public function actionView($id)
     {
         return $this->render('view', [
@@ -60,11 +48,7 @@ class ItemController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Item model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
+    //Создание нового компонента
     public function actionCreate()
     {
         $model = new Item();
@@ -85,13 +69,7 @@ class ItemController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Item model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    //Редактирование компонента 
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -117,13 +95,7 @@ class ItemController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Item model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    //Удаление компонента (обновляется status=2)
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -137,13 +109,6 @@ class ItemController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Item model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-     * @return Item the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Item::findOne(['id' => $id])) !== null) {

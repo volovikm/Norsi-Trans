@@ -6,14 +6,11 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Assembly_item;
 
-/**
- * Assembly_itemSearch represents the model behind the search form of `app\models\Assembly_item`.
- */
 class Assembly_itemSearch extends Assembly_item
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     
     public function rules()
     {
@@ -23,21 +20,12 @@ class Assembly_itemSearch extends Assembly_item
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
+    {return Model::scenarios();}
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
+    //Создание экземпляра ActiveDataProvider с запросом поиска
     public function search($params,$assembly_id)
     {
         $query = Assembly_item::find()->where(['assembly_id'=>$assembly_id,'assembly_item.status'=>1]);

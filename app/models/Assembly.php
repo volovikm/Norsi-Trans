@@ -19,12 +19,10 @@ class Assembly extends ActiveRecord
       ];
     }
 
-    //Связь с таблицей assembly_item
+    //Связь с таблицей assembly_item по ключу assembly_item.assembly_id = assembly.id 
     public function getAssemblyItem() {
         return $this->hasMany(Assembly_item::className(), ['assembly_id' => 'id']);
     }
-
-
 
     //Метод преобразования значения status в текст и обратно для вывода и поиска
     public function convertStatus($to_text=false,$text="") {
@@ -47,8 +45,6 @@ class Assembly extends ActiveRecord
             2=>"Удалена"
         ]);
     }
-
-
 
     //Метки атрибутов
     public function attributeLabels()

@@ -8,14 +8,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * AssemblyController implements the CRUD actions for Assembly model.
- */
 class AssemblyController extends Controller
 {
     /**
-     * @inheritDoc
-     */
+    * @inheritDoc
+    */
     public function behaviors()
     {
         return array_merge(
@@ -31,11 +28,7 @@ class AssemblyController extends Controller
         );
     }
 
-    /**
-     * Lists all Assembly models.
-     *
-     * @return string
-     */
+    //Переход на страницу с таблицей сборок
     public function actionIndex()
     {
         $searchModel = new AssemblySearch();
@@ -47,12 +40,7 @@ class AssemblyController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Assembly model.
-     * @param int $id
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    //Переход на страницу с view конкретной сборки
     public function actionView($id)
     {
         return $this->render('view', [
@@ -60,11 +48,7 @@ class AssemblyController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Assembly model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
+    //Создание сборки (без компонентов)
     public function actionCreate()
     {
         $model = new Assembly();
@@ -72,7 +56,7 @@ class AssemblyController extends Controller
         if(isset($this->request->post()["save"])) //Параметр, показывающий что данные отправлены нажатием кнопки, а не валидацией
         {
             if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save() && isset($this->request->post()["save"])) {
+                if ($model->load($this->request->post()) && $model->save()) {
                     return $this->redirect(['update', 'id' => $model->id]); 
                 }
             } else {
@@ -85,13 +69,7 @@ class AssemblyController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Assembly model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    //Редактирование сборки 
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -117,13 +95,7 @@ class AssemblyController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Assembly model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    //Удаление сборки (обновляется status=2)
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -137,13 +109,6 @@ class AssemblyController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Assembly model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-     * @return Assembly the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Assembly::findOne(['id' => $id])) !== null) {

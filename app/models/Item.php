@@ -27,8 +27,6 @@ class Item extends ActiveRecord
       return $this->hasOne(Item_type::className(), ['id' => 'item_type_id']);
   }
 
-
-
    //Метод преобразования значения in_stock в текст и обратно для вывода и поиска
    public function convertInStock($to_text=false,$text="") {
 
@@ -73,8 +71,6 @@ class Item extends ActiveRecord
       ]);
    }
 
-
-
    //Метки атрибутов
    public function attributeLabels()
     {
@@ -90,7 +86,7 @@ class Item extends ActiveRecord
    }
 
    //Метод нахождения всех компонентов с указанием типа комплектующей
-    public function getItemsArray()
+   public function getItemsArray()
     {
         $query=$this::find()->where(['status'=>'1'])->joinWith("itemType", true,"INNER JOIN");
         $items_arr=$query->asArray()->all();
@@ -102,5 +98,5 @@ class Item extends ActiveRecord
         }
 
         return($result_arr);
-    }
+   }
 }
