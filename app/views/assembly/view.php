@@ -1,7 +1,7 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\widgets\AssemblyItemGridview;
 
 /** @var yii\web\View $this */
 /** @var app\models\Assembly $model */
@@ -10,6 +10,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Сборки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
 ?>
 <div class="assembly-view">
 
@@ -36,5 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'status', 'value' => $model->convertStatus(true)],
         ],
     ]) ?>
+
+    <?php echo AssemblyItemGridview::widget(['assembly_id'=>$model->id,'show_buttons'=>false]) ?>
 
 </div>

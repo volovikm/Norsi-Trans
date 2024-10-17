@@ -89,15 +89,16 @@ class Item extends ActiveRecord
         ];
    }
 
-   //Метод нахождения всех компонентов
+   //Метод нахождения всех компонентов с указанием типа комплектующей
     public function getItemsArray()
     {
-        $items_arr=$this::find()->where(['status'=>'1'])->asArray()->all();
+        $query=$this::find()->where(['status'=>'1'])->joinWith("itemType", true,"INNER JOIN");
+        $items_arr=$query->asArray()->all();
 
         $result_arr=[];
         foreach($items_arr as $item)
         {
-            $result_arr+=[$item["id"]=>$item["name"]];
+            $result_arr+=[$item["id"]=>$item["itemType"]["name"].": ".$item["name"]];
         }
 
         return($result_arr);

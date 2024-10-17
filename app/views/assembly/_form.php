@@ -4,8 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Item;
 use app\models\Assembly_item;
-use app\models\Assembly_itemSearch; 
-use yii\grid\GridView;
+use app\widgets\AssemblyItemGridview;
 use yii\bootstrap5\Modal;
 
 /** @var yii\web\View $this */
@@ -14,22 +13,8 @@ use yii\bootstrap5\Modal;
 /** @var app\models\Assembly_itemSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-//searchModel для gridview комплектующих
-$searchModel = new Assembly_itemSearch();
-$dataProvider = $searchModel->search([],$model->id);
-
 $assembly_item = new Assembly_item();
 $item = new Item();
-
-//Кнопки списка компонентов сборки
-$assembly_item_buttons =   ['class' => 'yii\grid\ActionColumn',
-    'template' => '{delete}',
-    'buttons' => [
-            'delete' => function ($url, $assembly_item,$id) {
-                return Html::a('Удалить', ['/assembly_item/delete', 'id' => $assembly_item->id],[]);
-            },
-        ]
-    ];
 ?>
 
 <div class="assembly-form">
@@ -81,17 +66,7 @@ $assembly_item_buttons =   ['class' => 'yii\grid\ActionColumn',
         Modal::end();
 
         //Таблица комплектующих данной сборки
-        echo Html::tag('label', 'Комплектующие сборки', ['class' => 'control-label']);
-        echo GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'columns' => [
-                ['attribute' => 'item_name', 'value' =>'item.name'],
-                ['attribute' => 'item_type_name', 'value' =>'item.itemType.name'],
-                'count',
-                $assembly_item_buttons,
-            ],
-        ]); 
+        echo AssemblyItemGridview::widget(['assembly_id'=>$model->id]);
     }?>
 
     <div class="form-group">
