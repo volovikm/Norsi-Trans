@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Удалить сборку?',
+                'confirm' => 'Удалить/вернуть сборку?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'added_at',
             'updated_at',
             'name',
-            'status',
+            ['attribute' => 'status', 'value' => $model->convertStatus(true)],
         ],
     ]) ?>
 

@@ -14,11 +14,12 @@ class Assembly_itemSearch extends Assembly_item
     /**
      * {@inheritdoc}
      */
+    
     public function rules()
     {
         return [
             [['id', 'assembly_id', 'item_id', 'count', 'status'], 'integer'],
-            [['added_at', 'updated_at'], 'safe'],
+            [['added_at', 'updated_at','item_name','item_type_name'], 'safe'],
         ];
     }
 
@@ -56,8 +57,8 @@ class Assembly_itemSearch extends Assembly_item
             'desc' => ['item.name' => SORT_DESC],
         ];
         $dataProvider->sort->attributes['item_type_name'] = [
-            'asc' => ['item.item_type.name' => SORT_ASC],
-            'desc' => ['item.item_type.name' => SORT_DESC],
+            'asc' => ['item.item_type_id' => SORT_ASC],
+            'desc' => ['item.item_type_id' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -74,11 +75,11 @@ class Assembly_itemSearch extends Assembly_item
             'assembly_item.assembly_id' => $this->assembly_id,
             'assembly_item.item_id' => $this->item_id,
             'assembly_item.count' => $this->count,
-            'assembly_item.status' => $this->status,
+            'assembly_item.status' => $this->convertStatus(false,$this->status),
         ]);
 
         $query->andFilterWhere(['LIKE', 'item.name', $this->item_name]);
-        $query->andFilterWhere(['LIKE', 'item.item_type.name', $this->item_type_name]);
+        $query->andFilterWhere(['LIKE', 'item.itemType.name', $this->item_type_name]);
 
         return $dataProvider;
     }

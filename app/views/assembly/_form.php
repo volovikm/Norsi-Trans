@@ -21,6 +21,11 @@ $dataProvider = $searchModel->search([],$model->id);
 
 $assembly_item = new Assembly_item();
 $item = new Item();
+
+//Кнопки списка компонентов сборки
+$assembly_item_buttons =   ['class' => 'yii\grid\ActionColumn',
+    'template' => '{update} {delete}',
+];
 ?>
 
 <div class="assembly-form">
@@ -79,6 +84,8 @@ $item = new Item();
             ['attribute' => 'item_name', 'value' =>'item.name'],
             ['attribute' => 'item_type_name', 'value' =>'item.itemType.name'],
             'count',
+            ['attribute' => 'status','value' => function($assembly_item){return $assembly_item->convertStatus(true);}],
+            $assembly_item_buttons,
         ],
     ]); ?>
 

@@ -19,7 +19,7 @@ class Assembly_item extends ActiveRecord
     {
         return [
             [['count','item_id','assembly_id'], 'required'],
-            [['count','item_id','assembly_id'], 'integer']
+            [['item_id','assembly_id'], 'integer']
         ];
     }
 
@@ -32,6 +32,30 @@ class Assembly_item extends ActiveRecord
     public function getItem() {
         return $this->hasOne(Item::className(), ['id' => 'item_id']);
     }
+
+
+    //Метод преобразования значения status в текст и обратно для вывода и поиска
+    public function convertStatus($to_text=false,$text="") {
+
+        if($to_text) return ($this->statusValuesArr()[$this->status]);
+        else
+        {
+            switch(trim(mb_strtolower($text))){
+                case "активна": return 1;
+                case "удалена": return 2;
+            }
+        }
+    }
+
+    //Массив возможных значений status
+    public function statusValuesArr()
+    {
+        return([
+            1=>"Активна",
+            2=>"Удалена"
+        ]);
+    }
+
 
     //Метки атрибутов
    public function attributeLabels()

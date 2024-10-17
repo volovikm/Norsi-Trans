@@ -98,10 +98,13 @@ class AssemblyController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post()) && isset($this->request->post()["save"])) {
             
+            //var_dump($this->request->post()); exit;
+
             //Внесение полей из запроса в модель
             foreach($this->request->post()["Assembly"] as $key=>$property)
             {
-                $model->$key=$property;
+                if(isset($model->$key))
+                    $model->$key=$property;
             }
 
             //Внесение времени обновления
