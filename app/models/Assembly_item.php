@@ -63,6 +63,9 @@ class Assembly_item extends ActiveRecord
                 'item_name' => 'Название',
                 'item_type_name' => 'Тип',
                 'count'=>'Количество',
+                'added_at'=>'Дата добавления',
+                'updated_at'=>'Дата обновления',
+                'status'=>'Статус'
         ];
     }
 }

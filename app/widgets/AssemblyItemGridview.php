@@ -22,9 +22,13 @@ class AssemblyItemGridview extends Widget
         $dataProvider = $searchModel->search([],$this->assembly_id);
 
         $config_columns=[
-            ['attribute' => 'item_name', 'value' =>'item.name'],
+            'id',
             ['attribute' => 'item_type_name', 'value' =>'item.itemType.name'],
+            ['attribute' => 'item_name', 'value' =>'item.name'],
+            'added_at',
+            'updated_at',
             'count',
+            ['attribute' => 'status', 'value' => function($model){return $model->convertStatus(true);}],
         ];
 
         //Кнопки списка компонентов сборки

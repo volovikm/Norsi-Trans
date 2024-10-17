@@ -15,7 +15,7 @@ class Assembly_itemSearch extends Assembly_item
     public function rules()
     {
         return [
-            [['id', 'assembly_id', 'item_id', 'status'], 'integer'],
+            [[ 'assembly_id', 'item_id',], 'integer'],
         ];
     }
 
